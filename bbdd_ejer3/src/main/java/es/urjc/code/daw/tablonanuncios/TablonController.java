@@ -3,6 +3,7 @@ package es.urjc.code.daw.tablonanuncios;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +26,9 @@ public class TablonController {
 	}
 
 	@RequestMapping("/")
-	public String tablon(Model model) {
+	public String tablon(Model model, Pageable page) {
 
-		model.addAttribute("anuncios", repository.findAll());
+		model.addAttribute("anuncios", repository.findAll(page));
 
 		return "tablon";
 	}
