@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,5 +40,26 @@ public class SchoolController {
 	@RequestMapping("/students/")
 	public List<Student> getStudents() {
 		return studentRepository.findAll();
+	}
+	
+	@RequestMapping("/projects/")
+	public List<Project> getProjects() {
+		return projectRepository.findAll();
+	}
+	
+	//Deleting a student doesn't delete her associated project
+	@DeleteMapping("/students/{id}")
+	public Student deleteStudent(@PathVariable Long id) {
+		Student student = studentRepository.findById(id).get();		
+		studentRepository.deleteById(id);
+		return student;
+	}
+	
+	//A project only can be deleted if it has no associated student.
+	@DeleteMapping("/projects/{id}")
+	public Project deleteProject(@PathVariable Long id) {
+		Project project = projectRepository.findById(id).get();		
+		projectRepository.deleteById(id);
+		return project;
 	}
 }

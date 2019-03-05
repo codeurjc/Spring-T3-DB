@@ -27,8 +27,8 @@ public class BlogController {
 	public void init() {
 
 		Blog blog = new Blog("New", "My new product");
-		blog.getComments().add(new Comment("Cool", "Pepe"));
-		blog.getComments().add(new Comment("Very cool", "Juan"));
+		blog.addComment(new Comment("Cool", "Pepe"));
+		blog.addComment(new Comment("Very cool", "Juan"));
 
 		blogRepository.save(blog);
 	}
@@ -46,7 +46,7 @@ public class BlogController {
 		return blog;
 	}
 
-	//A comment only can be deleted if it has no associated blog
+	// Deleting a comment removes it from associated blog
 	@DeleteMapping("/comments/{id}")
 	public Comment deleteComment(@PathVariable Long id) {
 		Comment comment = commentRepository.findById(id).get();

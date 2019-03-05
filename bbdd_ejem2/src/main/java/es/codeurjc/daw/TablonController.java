@@ -18,7 +18,7 @@ public class TablonController {
 	@PostConstruct
 	public void init() {
 		repository.save(new Anuncio("Pepe", "Hola caracola", "XXXX"));
-		repository.save(new Anuncio("Juan", "Hola caracola", "XXXX"));
+		repository.save(new Anuncio("Juan", "Hola caracola2", "XXXX2"));
 	}
 
 	@GetMapping("/")
