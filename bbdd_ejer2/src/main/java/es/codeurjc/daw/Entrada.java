@@ -19,7 +19,6 @@ public class Entrada {
 	private String name;
 	private String nickname;
 	private String title;
-	private String intro;
 	private String content;
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Comment> comments;
@@ -57,14 +56,6 @@ public class Entrada {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
 	}
 
 	public String getContent() {

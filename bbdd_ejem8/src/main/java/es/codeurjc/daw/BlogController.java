@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,13 +34,13 @@ public class BlogController {
 		blogRepository.save(blog);
 	}
 
-	@RequestMapping("/blogs")
+	@GetMapping("/blogs")
 	public List<Blog> getBlogs() throws Exception {
 		return blogRepository.findAll();
 	}
 
 	// Deleting a blog delete its associated comments
-	@DeleteMapping("/blogs/{id}")
+	@GetMapping("/blogs/{id}")
 	public Blog deleteBlog(@PathVariable Long id) {
 		Blog blog = blogRepository.findById(id).get();
 		blogRepository.deleteById(id);

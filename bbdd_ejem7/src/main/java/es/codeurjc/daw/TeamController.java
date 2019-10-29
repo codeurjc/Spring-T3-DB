@@ -6,8 +6,8 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.daw.model.Player;
@@ -39,12 +39,12 @@ public class TeamController {
 		teamRepository.save(team);
 	}
 
-	@RequestMapping("/teams/")
+	@GetMapping("/teams/")
 	public List<Team> getTeams() throws Exception {
 		return teamRepository.findAll();
 	}
 	
-	@RequestMapping("/players/")
+	@GetMapping("/players/")
 	public List<Player> getPlayers() throws Exception {
 		return playerRepository.findAll();
 	}

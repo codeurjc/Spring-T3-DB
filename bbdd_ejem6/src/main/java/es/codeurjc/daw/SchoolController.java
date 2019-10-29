@@ -6,8 +6,8 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -38,13 +38,13 @@ public class SchoolController {
 	interface StudentView extends Student.BasicAtt, Student.ProjectAtt, Project.BasicAtt {}
 	
 	@JsonView(StudentView.class)
-	@RequestMapping("/students/")
+	@GetMapping("/students/")
 	public List<Student> getStudents() throws Exception {
 		return studentRepository.findAll();
 	}
 	
 	@JsonView(StudentView.class)
-	@RequestMapping("/students/{id}")
+	@GetMapping("/students/{id}")
 	public Student getStudent(@PathVariable long id) throws Exception {
 		return studentRepository.findById(id).get();
 	}
@@ -52,13 +52,13 @@ public class SchoolController {
 	interface ProjectView extends Project.BasicAtt, Project.StudentAtt, Student.BasicAtt {}
 	
 	@JsonView(ProjectView.class)
-	@RequestMapping("/projects/")
+	@GetMapping("/projects/")
 	public List<Project> getProjects() throws Exception {
 		return projectRepository.findAll();
 	}
 	
 	@JsonView(ProjectView.class)
-	@RequestMapping("/projects/{id}")
+	@GetMapping("/projects/{id}")
 	public Project getProject(@PathVariable long id) throws Exception {
 		return projectRepository.findById(id).get();
 	}

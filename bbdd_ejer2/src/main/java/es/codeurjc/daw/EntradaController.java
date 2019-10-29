@@ -36,37 +36,43 @@ public class EntradaController {
 	
 	@PutMapping("{id}")
 	public ResponseEntity<Entrada> updateEntrada(@RequestBody Entrada entrada, @PathVariable long id) {
-		Optional<Entrada> saved = repository.findById(id);
-		if(!saved.isPresent()) {
+		
+		Optional<Entrada> found = repository.findById(id);
+		
+		if(found.isPresent()) {
+			entrada.setId(id);
+			entrada.setComments(found.get().getComments());
+			Entrada updated = repository.save(entrada);
+			return new ResponseEntity<>(updated, HttpStatus.OK);
+		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		Entrada updated = repository.save(entrada);
-		return new ResponseEntity<>(updated, HttpStatus.OK);
+
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Entrada> deleteEntrada(@PathVariable long id) {
-		Optional<Entrada> saved = repository.findById(id);
+		Optional<Entrada> found = repository.findById(id);
 		
-		if(!saved.isPresent()) {
+		if(found.isPresent()) {
+			repository.deleteById(id);
+			return new ResponseEntity<>(found.get(), HttpStatus.OK);
+		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		repository.deleteById(id);
-		
-		return new ResponseEntity<>(saved.get(), HttpStatus.OK);
 	}
 	
 	@GetMapping("{id}") 
 	public ResponseEntity<Entrada> getEntrada(@PathVariable long id) {
-		Optional<Entrada> saved = repository.findById(id);
+		Optional<Entrada> found = repository.findById(id);
 		
-		if(!saved.isPresent()) {
+		if(found.isPresent()) {
+			return new ResponseEntity<>(found.get(), HttpStatus.OK);
+		}else{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity<>(saved.get(), HttpStatus.OK);
 
 	}
 	
@@ -74,13 +80,14 @@ public class EntradaController {
 	public ResponseEntity<Entrada> addComment(@PathVariable long id, @RequestBody Comment comment) {
 		Optional<Entrada> found = repository.findById(id);
 		
-		if(!found.isPresent()) {
+		if(found.isPresent()) {
+			found.get().getComments().add(comment);
+			Entrada saved = repository.save(found.get());
+			return new ResponseEntity<>(saved, HttpStatus.OK);
+		}else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
-		found.get().getComments().add(comment);
-		Entrada saved = repository.save(found.get());
-		return new ResponseEntity<>(saved, HttpStatus.OK);
+		
 		
 	}
 	

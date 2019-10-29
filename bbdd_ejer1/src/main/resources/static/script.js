@@ -1,7 +1,7 @@
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://localhost:8080/items/'
     }).done(function (items) {
         console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -12,7 +12,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://localhost:8080/items/',
         data: JSON.stringify(item),
         processData: false,
         headers: {

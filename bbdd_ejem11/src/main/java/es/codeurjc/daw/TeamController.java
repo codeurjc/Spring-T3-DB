@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,7 +52,7 @@ public class TeamController {
 	interface TeamListView extends Team.BasicAtt, Team.PlayersAtt, Player.BasicAtt {}
 	
 	@JsonView(TeamListView.class)
-	@RequestMapping("/teams/")
+	@GetMapping("/teams/")
 	public List<Team> getTeams(@RequestParam(required=false) String name) throws Exception {
 		
 		if(name == null){
@@ -65,7 +65,7 @@ public class TeamController {
 	interface PlayerView extends Player.BasicAtt, Player.TeamAtt, Team.BasicAtt {}
 	
 	@JsonView(PlayerView.class)
-	@RequestMapping("/players/{id}")
+	@GetMapping("/players/{id}")
 	public Player getPlayer(@PathVariable long id) throws Exception {
 		return playerRepository.findById(id).get();
 	}

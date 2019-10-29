@@ -3,6 +3,7 @@ package es.codeurjc.daw;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class BlogController {
 		repository.save(blog2);
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public Iterable<Blog> getBlogs(@RequestParam(required=false) String author) {
 		
 		if(author == null){

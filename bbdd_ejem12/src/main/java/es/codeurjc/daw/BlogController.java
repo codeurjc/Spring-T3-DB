@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class BlogController {
 		repository.save(blog2);
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public List<Blog> getBlogs(@RequestParam(required=false) String author) throws Exception {
 		if(author == null){
 			return repository.findAll();
