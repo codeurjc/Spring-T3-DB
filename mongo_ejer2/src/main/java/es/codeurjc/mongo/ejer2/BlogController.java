@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import es.codeurjc.mongo.ejer2.model.Comentario;
 import es.codeurjc.mongo.ejer2.model.Entrada;
 

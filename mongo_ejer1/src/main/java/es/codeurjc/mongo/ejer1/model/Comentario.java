@@ -2,8 +2,6 @@ package es.codeurjc.mongo.ejer1.model;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-
 public class Comentario {
 	
 	private String apodo;
